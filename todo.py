@@ -45,7 +45,7 @@ def add(items_to_add):
 
     with open(todo_file(), 'a') as f:
         for item in items_to_add:
-            f.write(item + '\n')
+            f.write(item.strip() + '\n')
 
     print_todo()
 
@@ -57,11 +57,19 @@ def print_todo():
         for idx, line in enumerate(f.readlines()):
             print(str(idx) + ') ' + line.strip())
 
+def print_completed():
+    print("\nCompleted")
+    print("========================")
+    with open(completed_file(), 'r') as f:
+        for idx, line in enumerate(f.readlines()):
+            print(str(idx) + ') ' + line.strip())
+
 
 def main():
     parser = argparse.ArgumentParser(prog="todo", description="Todo Application")
     parser.add_argument('-a', '--add', action="append", dest="add_items", metavar="<name>", help='Add a new todo item')
     parser.add_argument('-c', '--complete', action="append", dest="complete_items", metavar="<int>", type=int, help="Complete a todo item by index")
+    parser.add_argument('-p', '--print-completed', action="store_true", dest="print_complete", help="Print completed list")
 
     args = parser.parse_args()
 
@@ -69,6 +77,8 @@ def main():
         add(args.add_items)
     elif args.complete_items is not None:
         complete(args.complete_items)
+    elif args.print_complete:
+        print_completed()
     else:
         print_todo()
 
