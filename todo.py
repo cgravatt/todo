@@ -51,7 +51,7 @@ def add(items_to_add):
 
 
 def print_todo():
-    print("Todo")
+    print("\nTodo")
     print("========================")
     with open(todo_file(), 'r') as f:
         for idx, line in enumerate(f.readlines()):
