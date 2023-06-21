@@ -72,5 +72,6 @@ def main():
     else:
         print_todo()
 
+
 if __name__ == '__main__':
     main()
